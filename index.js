@@ -64,11 +64,13 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+    
+    return Math.floor(Math.random() * (25 - 10 + 1) + 10);
+    
 }
 
-
+console.log(takimSkoru());
 
 
 /* Görev 3: macSonucu() 
@@ -86,9 +88,17 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
+function macSonucu(score,ceyrek){
   /*Kodunuzu buraya yazınız*/
+  const scoreboard = {};
+  for(let i = 1; i<= ceyrek; i++){
+    scoreboard["EvSahibi"] = takimSkoru(score)*i;
+   scoreboard["KonukTakim"] = takimSkoru(score)*i;
+  }
+  return scoreboard;
 }
+
+console.log(macSonucu(takimSkoru, 4));
 
 
 
@@ -109,11 +119,17 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(score) {
+  
+  const scoreboard = {};
+
+  scoreboard["EvSahibi"] = takimSkoru(score);
+  scoreboard["KonukTakim"] = takimSkoru(score);
+  return scoreboard;
 
 }
 
+console.log(periyotSkoru(takimSkoru));
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
 Aşağıdaki skorTabelasi() fonksiyonunu kullanarak aşağıdakileri yapınız:
@@ -146,21 +162,29 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function skorTabelasi(pscore, tscore, ceyrek) {
+  const arr = [];
+  const per = periyotSkoru(pscore);
+  var tak = takimSkoru(tscore)
+  for(let i = 1; i<=ceyrek; i++){
+    var res = `${i}. Periyot: Ev Sahibi ${tak(per["EvSahibi"])} Konuk Takım ${per["KonukTakim"]}`
+    arr.push(res);
+  }
+  return arr;
 }
 
+console.log(skorTabelasi(periyotSkoru,takimSkoru,4))
 
 
 
 /* Aşağıdaki satırları lütfen değiştirmeyiniz*/
-function as(){
+function sa(){
   console.log('Kodlar çalışıyor');
-  return 'sa';
+  return 'as';
 }
-as();
+sa();
 module.exports = {
-  as,
+  sa,
   ilkiniDon,
   skor1,
   skor2,
