@@ -138,12 +138,12 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(score) {
+function periyotSkoru(cb) {
   
   const scoreboard = {};
 
-  scoreboard["EvSahibi"] = takimSkoru(score);
-  scoreboard["KonukTakim"] = takimSkoru(score);
+  scoreboard["EvSahibi"] = cb();
+  scoreboard["KonukTakim"] = cb();
   return scoreboard;
 
 }
@@ -184,7 +184,7 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 
 function skorTabelasi(pscore, tscore, ceyrek) {
   const arr = [];
-  const per = periyotSkoru(pscore);
+  // const per = periyotSkoru(pscore);
 
   for(let i = 1; i<=ceyrek; i++){
     var ev  = takimSkoru(tscore);
