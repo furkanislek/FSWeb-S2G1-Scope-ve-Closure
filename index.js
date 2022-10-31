@@ -86,16 +86,29 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
   "EvSahibi": 92,
   "KonukTakim": 80
 }
-*/ 
 
-function macSonucu(score,ceyrek){
-  /*Kodunuzu buraya yazınız*/
-  const scoreboard = {};
+const scoreboard = {};
   for(let i = 1; i<= ceyrek; i++){
-    scoreboard["EvSahibi"] = takimSkoru(score)*i;
+   scoreboard["EvSahibi"] = takimSkoru(score)*i;
    scoreboard["KonukTakim"] = takimSkoru(score)*i;
   }
   return scoreboard;
+*/ 
+
+function macSonucu(callback,ceyrek){
+  /*Kodunuzu buraya yazınız*/
+  let evSahibi = 0;
+  let konukTakim = 0;
+
+  for(let i = 1; i<=ceyrek ; i++){
+    evSahibi += callback();
+    konukTakim += callback()
+  }
+
+  let skor = {};
+  skor.EvSahibi = evSahibi;
+  skor.KonukTakim = konukTakim;
+  return skor;
 }
 
 console.log(macSonucu(takimSkoru, 4));
@@ -115,6 +128,12 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
 {
   "EvSahibi": 18,
   "KonukTakim": 12
+
+  const scoreboard = {};
+
+  scoreboard["EvSahibi"] = takimSkoru(score);
+  scoreboard["KonukTakim"] = takimSkoru(score);
+  return scoreboard;
 }
   */
 
@@ -158,6 +177,7 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
   "4. Periyot: Ev Sahibi 18 - Konuk Takım 18",
   "1. Uzatma: Ev Sahibi 10 - Konuk Takım 6" 
   "Maç Sonucu: Ev Sahibi 71 - Konuk Takım 67"  
+    var res = `${i}. Periyot: Ev Sahibi ${takimSkoru(tscore)} Konuk Takım ${takimSkoru(tscore)}`
 ]
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
@@ -165,9 +185,11 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 function skorTabelasi(pscore, tscore, ceyrek) {
   const arr = [];
   const per = periyotSkoru(pscore);
-  var tak = takimSkoru(tscore)
+
   for(let i = 1; i<=ceyrek; i++){
-    var res = `${i}. Periyot: Ev Sahibi ${tak(per["EvSahibi"])} Konuk Takım ${per["KonukTakim"]}`
+    var ev  = takimSkoru(tscore);
+    var tak = takimSkoru(tscore);
+    var res = `${i}. Periyot: Ev Sahibi ${ev} Konuk Takım ${tak}`
     arr.push(res);
   }
   return arr;
